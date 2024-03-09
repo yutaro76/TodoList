@@ -1,9 +1,7 @@
-from django.shortcuts import render
-from rest_framework.permissions import AllowAny
-from rest_framework import generics
 from .models import Task
 from rest_framework import viewsets
 from .serializers import TaskSerializer
+from rest_framework import viewsets
 
 # Create your views here.
 class TaskViewSet(viewsets.ModelViewSet):
@@ -11,13 +9,13 @@ class TaskViewSet(viewsets.ModelViewSet):
   serializer_class = TaskSerializer
 
   def get_queryset(self):
-        queryset = Task.objects.all()
-        deleted = self.request.query_params.get('deleted', None)
-        completed = self.request.query_params.get('completed', None)
+    queryset = Task.objects.all()
+    deleted = self.request.query_params.get('deleted', None)
+    completed = self.request.query_params.get('completed', None)
 
-        if deleted is not None:
-            queryset = queryset.filter(deleted=deleted.lower() == 'true')
-        if completed is not None:
-            queryset = queryset.filter(completed=completed.lower() == 'true')
+    if deleted is not None:
+        queryset = queryset.filter(deleted=deleted.lower() == 'true')
+    if completed is not None:
+        queryset = queryset.filter(completed=completed.lower() == 'true')
 
-        return queryset
+    return queryset

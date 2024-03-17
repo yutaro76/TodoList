@@ -1,0 +1,1 @@
+web: gunicorn /Applications/js_project/TodoList/backend/drfapi.wsgi --log-file -
